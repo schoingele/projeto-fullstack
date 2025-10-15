@@ -1,0 +1,39 @@
+{
+  "name": "backend-cursos",
+  "version": "1.0.0",
+  "description": "Backend RESTful para gest\u00e3o de cursos com Postgres e JWT",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "jest --runInBand --detectOpenHandles",
+    "docker:build": "docker build -t backend-cursos .",
+    "docker:up": "docker-compose up -d",
+    "seed": "ts-node src/seeds/seed.ts"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "pg": "^8.10.0",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.3.14"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/jest": "^29.5.2",
+    "@types/jsonwebtoken": "^9.0.1",
+    "@types/node": "^20.2.5",
+    "jest": "^29.6.1",
+    "supertest": "^6.4.4",
+    "ts-jest": "^29.1.0",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.1.6"
+  }
+}

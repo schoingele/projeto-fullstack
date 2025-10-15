@@ -1,0 +1,18 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-10-01T00:00:00.000Z",
+  "__export_source": "insomnia.desktop.app",
+  "resources": [
+    {
+      "_id": "wrk_1234567890",
+      "parentId": null,
+      "modified": 0,
+      "created": 0,
+      "name": "API Cursos - Backend",
+      "description": "Coleção de testes da API RESTful de Cursos com JWT",
+      "scope": "collection",
+      "_type": "workspace"
+    }
+  ]
+}
