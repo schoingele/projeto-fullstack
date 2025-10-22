@@ -17,9 +17,15 @@ async function run() {
   const matriculaRepo = AppDataSource.getRepository(Matricula);
 
   // clear (careful: in production don't do this)
-  await matriculaRepo.delete({});
-  await alunoRepo.delete({});
-  await cursoRepo.delete({});
+  // On Postgres TRUNCATE must account for FK constraints; use CASCADE to ensure dependent rows are removed.
+  try {
+    await AppDataSource.query('TRUNCATE TABLE "matricula" CASCADE; TRUNCATE TABLE "aluno" CASCADE; TRUNCATE TABLE "curso" CASCADE;');
+  } catch (e) {
+    // fallback para outros bancos / environments: tentar clear por repositório
+    await matriculaRepo.clear();
+    await alunoRepo.clear();
+    await cursoRepo.clear();
+  }
 
   const senha = await bcrypt.hash('123456', 10);
 

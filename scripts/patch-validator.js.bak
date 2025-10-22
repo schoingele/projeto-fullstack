@@ -1,0 +1,25 @@
+const fs = require('fs');
+const path = require('path');
+
+const target = path.join(__dirname, '..', 'node_modules', 'validator', 'lib', 'isURL.js');
+
+if (!fs.existsSync(target)) {
+  console.log('validator isURL file not found, skipping patch');
+  process.exit(0);
+}
+
+let content = fs.readFileSync(target, 'utf8');
+if (content.indexOf("require_protocol: true") !== -1) {
+  console.log('validator isURL already patched');
+  process.exit(0);
+}
+
+const patched = content.replace("require_protocol: false,", "require_protocol: true,");
+
+if (patched === content) {
+  console.log('No replacement made; pattern not found');
+  process.exit(0);
+}
+
+fs.writeFileSync(target, patched, 'utf8');
+console.log('Patched validator isURL.js -> require_protocol: true');

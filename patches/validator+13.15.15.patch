@@ -1,0 +1,11 @@
+*** Begin Patch
+*** Update File: node_modules/validator/lib/isURL.js
+@@
+-  options = (0, _merge.default)(options, default_url_options);
++  // Merge options with defaults. Ensure require_protocol defaults to true to avoid
++  // protocol-relative URL validation bypass (defensive patch applied upstream: GHSA-9965-vmph-33xx)
++  options = (0, _merge.default)(options, default_url_options);
++  if (typeof options.require_protocol === 'undefined') {
++    options.require_protocol = true;
++  }
+*** End Patch

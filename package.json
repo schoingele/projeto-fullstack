@@ -8,7 +8,8 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "test": "jest --runInBand --detectOpenHandles",
-  "test:ci": "cross-env NODE_ENV=test jest --runInBand --detectOpenHandles",
+    "test:ci": "cross-env NODE_ENV=test jest --runInBand --detectOpenHandles",
+  "postinstall": "node scripts/apply-patches.js",
     "docker:build": "docker build -t backend-cursos .",
     "docker:up": "docker-compose up -d",
     "seed": "ts-node src/seeds/seed.ts"
@@ -23,7 +24,11 @@
     "jsonwebtoken": "^9.0.0",
     "pg": "^8.10.0",
     "reflect-metadata": "^0.1.13",
-    "typeorm": "^0.3.14"
+    "typeorm": "^0.3.14",
+    "validator": "file:vendor/validator"
+  },
+  "overrides": {
+    "validator": "file:vendor/validator"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",

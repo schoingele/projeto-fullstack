@@ -28,6 +28,38 @@
    npm run seed
    ```
 
+## Segurança
+
+O projeto segue boas práticas de segurança: as dependências são monitoradas e há mecanismos para aplicar correções quando necessário. Recomenda-se manter as variáveis de ambiente seguras e atualizar dependências para versões oficiais assim que houver correções upstream.
+
+## Quick start (rápido)
+
+1. Copie `.env.example` para `.env` e ajuste se necessário.
+2. Instale dependências:
+   ```bash
+   npm install
+   ```
+3. Inicie em modo de desenvolvimento:
+   ```bash
+   npm run dev
+   ```
+4. Opcional: popular dados de exemplo (seed):
+   ```bash
+   npm run seed
+   ```
+
+
+## Autenticação
+
+- Endpoints principais:
+   - POST /auth/register — cria um usuário (body: { nome, email, senha })
+   - POST /auth/login — gera JWT (body: { email, senha })
+
+- Uso rápido:
+   1. Faça POST em `/auth/login` com credenciais válidas; a resposta contém `{ "token": "..." }`.
+   2. Em requisições protegidas, envie o header `Authorization: Bearer <token>`.
+
+
 ## Endpoints principais
 - POST /auth/register
 - POST /auth/login

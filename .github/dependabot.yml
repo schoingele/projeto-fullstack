@@ -1,0 +1,15 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    ignore:
+      - dependency-name: "validator"
+        # don't auto-merge validator updates because upstream fix may require manual review
+        update-types: ["version-update:semver-major", "version-update:semver-minor", "version-update:semver-patch"]
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"

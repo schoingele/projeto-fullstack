@@ -1,0 +1,12 @@
+{
+  "name": "validator",
+  "version": "13.15.16",
+  "description": "String validation and sanitization (vendor copy)",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "lib",
+    "README.md"
+  ],
+  "license": "MIT"
+}

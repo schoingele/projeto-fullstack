@@ -1,7 +1,7 @@
 {
   "_type": "export",
   "__export_format": 4,
-  "__export_date": "2025-10-01T00:00:00.000Z",
+  "__export_date": "2025-10-22T00:00:00.000Z",
   "__export_source": "insomnia.desktop.app",
   "resources": [
     {
@@ -13,6 +13,156 @@
       "description": "Coleção de testes da API RESTful de Cursos com JWT",
       "scope": "collection",
       "_type": "workspace"
+    },
+    {
+      "_id": "env_123456",
+      "parentId": "wrk_1234567890",
+      "_type": "environment",
+      "name": "Base Environment",
+      "data": {
+        "base_url": "http://localhost:3000",
+        "token": "",
+        "alunoId": "1",
+        "cursoId": "1",
+        "matriculaId": "1"
+      }
+    },
+    {
+      "_id": "req_auth_register",
+      "parentId": "wrk_1234567890",
+      "_type": "request",
+      "name": "Auth - Register",
+      "method": "POST",
+      "url": "{{ base_url }}/auth/register",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nome\": \"Teste\",\n  \"email\": \"teste@mail.com\",\n  \"senha\": \"123456\"\n}"
+      },
+      "headers": [ { "name": "Content-Type", "value": "application/json" } ]
+    },
+    {
+      "_id": "req_auth_login",
+      "parentId": "wrk_1234567890",
+      "_type": "request",
+      "name": "Auth - Login",
+      "method": "POST",
+      "url": "{{ base_url }}/auth/login",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"rodrigo@mail.com\",\n  \"senha\": \"123456\"\n}"
+      },
+      "headers": [ { "name": "Content-Type", "value": "application/json" } ],
+      "description": "Após executar, copie o campo token da resposta e cole em Environment → token"
+    },
+    {
+      "_id": "req_get_alunos",
+      "parentId": "wrk_1234567890",
+      "_type": "request",
+      "name": "Alunos - Listar",
+      "method": "GET",
+      "url": "{{ base_url }}/alunos",
+      "headers": [ { "name": "Authorization", "value": "Bearer {{ token }}" } ]
+    },
+    {
+      "_id": "req_get_aluno",
+      "parentId": "wrk_1234567890",
+      "_type": "request",
+      "name": "Alunos - Buscar por ID",
+      "method": "GET",
+      "url": "{{ base_url }}/alunos/{{ alunoId }}",
+      "headers": [ { "name": "Authorization", "value": "Bearer {{ token }}" } ],
+      "description": "Defina a variável alunoId no ambiente antes de executar (ex.: 1)"
+    },
+    {
+      "_id": "req_post_aluno",
+      "parentId": "wrk_1234567890",
+      "_type": "request",
+      "name": "Alunos - Criar",
+      "method": "POST",
+      "url": "{{ base_url }}/alunos",
+      "body": { "mimeType": "application/json", "text": "{\n  \"nome\": \"Aluno X\",\n  \"email\": \"alunox@mail.com\",\n  \"senha\": \"123456\"\n}" },
+      "headers": [ { "name": "Content-Type", "value": "application/json" }, { "name": "Authorization", "value": "Bearer {{ token }}" } ]
+    },
+    {
+      "_id": "req_put_aluno",
+      "parentId": "wrk_1234567890",
+      "_type": "request",
+      "name": "Alunos - Atualizar (PUT)",
+      "method": "PUT",
+      "url": "{{ base_url }}/alunos/{{ alunoId }}",
+      "body": { "mimeType": "application/json", "text": "{\n  \"nome\": \"Aluno Atualizado\",\n  \"email\": \"alunoatual@mail.com\",\n  \"senha\": \"123456\"\n}" },
+      "headers": [ { "name": "Content-Type", "value": "application/json" }, { "name": "Authorization", "value": "Bearer {{ token }}" } ],
+      "description": "Defina alunoId no ambiente antes de executar"
+    },
+    {
+      "_id": "req_patch_aluno",
+      "parentId": "wrk_1234567890",
+      "_type": "request",
+      "name": "Alunos - Atualizar parcial (PATCH)",
+      "method": "PATCH",
+      "url": "{{ base_url }}/alunos/{{ alunoId }}",
+      "body": { "mimeType": "application/json", "text": "{\n  \"telefone\": \"+5511999999999\"\n}" },
+      "headers": [ { "name": "Content-Type", "value": "application/json" }, { "name": "Authorization", "value": "Bearer {{ token }}" } ]
+    },
+    {
+      "_id": "req_delete_aluno",
+      "parentId": "wrk_1234567890",
+      "_type": "request",
+      "name": "Alunos - Deletar",
+      "method": "DELETE",
+      "url": "{{ base_url }}/alunos/{{ alunoId }}",
+      "headers": [ { "name": "Authorization", "value": "Bearer {{ token }}" } ],
+      "description": "Defina alunoId no ambiente antes de executar"
+    },
+    {
+      "_id": "req_get_cursos",
+      "parentId": "wrk_1234567890",
+      "_type": "request",
+      "name": "Cursos - Listar",
+      "method": "GET",
+      "url": "{{ base_url }}/cursos",
+      "headers": [ { "name": "Authorization", "value": "Bearer {{ token }}" } ]
+    },
+    {
+      "_id": "req_get_curso",
+      "parentId": "wrk_1234567890",
+      "_type": "request",
+      "name": "Cursos - Buscar por ID",
+      "method": "GET",
+      "url": "{{ base_url }}/cursos/{{ cursoId }}",
+      "headers": [ { "name": "Authorization", "value": "Bearer {{ token }}" } ],
+      "description": "Defina cursoId no ambiente antes de executar (ex.: 1)"
+    },
+    {
+      "_id": "req_post_curso",
+      "parentId": "wrk_1234567890",
+      "_type": "request",
+      "name": "Cursos - Criar",
+      "method": "POST",
+      "url": "{{ base_url }}/cursos",
+      "body": { "mimeType": "application/json", "text": "{\n  \"titulo\": \"Curso Novo\",\n  \"descricao\": \"Descrição do curso\",\n  \"duracao_horas\": 10\n}" },
+      "headers": [ { "name": "Content-Type", "value": "application/json" }, { "name": "Authorization", "value": "Bearer {{ token }}" } ]
+    },
+    {
+      "_id": "req_put_curso",
+      "parentId": "wrk_1234567890",
+      "_type": "request",
+      "name": "Cursos - Atualizar (PUT)",
+      "method": "PUT",
+      "url": "{{ base_url }}/cursos/{{ cursoId }}",
+      "body": { "mimeType": "application/json", "text": "{\n  \"titulo\": \"Curso Atualizado\",\n  \"descricao\": \"Nova descrição\",\n  \"duracao_horas\": 12\n}" },
+      "headers": [ { "name": "Content-Type", "value": "application/json" }, { "name": "Authorization", "value": "Bearer {{ token }}" } ],
+      "description": "Defina cursoId no ambiente antes de executar"
+    },
+    {
+      "_id": "req_delete_curso",
+      "parentId": "wrk_1234567890",
+      "_type": "request",
+      "name": "Cursos - Deletar",
+      "method": "DELETE",
+      "url": "{{ base_url }}/cursos/{{ cursoId }}",
+      "headers": [ { "name": "Authorization", "value": "Bearer {{ token }}" } ],
+      "description": "Defina cursoId no ambiente antes de executar"
     }
   ]
 }
