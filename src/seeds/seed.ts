@@ -37,7 +37,8 @@ async function run() {
 
   const m1 = matriculaRepo.create({ aluno: alunos[0], curso: cursos[0] } as any);
   const m2 = matriculaRepo.create({ aluno: alunos[1], curso: cursos[1] } as any);
-  await matriculaRepo.save([m1, m2]);
+  await matriculaRepo.save(m1);
+  await matriculaRepo.save(m2);
 
   console.log('Seed completed');
   await AppDataSource.destroy();

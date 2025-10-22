@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToMany, JoinTable } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany } from 'typeorm';
 import { Curso } from './Curso';
+import { Matricula } from './Matricula';
 
 @Entity({ name: 'aluno' })
 export class Aluno {
@@ -24,7 +25,9 @@ export class Aluno {
   @CreateDateColumn({ name: 'criado_em' })
   criadoEm!: Date;
 
-  @ManyToMany(() => Curso, (curso) => curso.alunos)
-  @JoinTable({ name: 'matricula' })
-  cursos!: Curso[];
+  @OneToMany(() => Matricula, (matricula) => matricula.aluno)
+  matriculas!: Matricula[];
+
+  // helper to keep compatibility with previous API which returned cursos
+  cursos?: Curso[];
 }

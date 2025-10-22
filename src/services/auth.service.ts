@@ -21,6 +21,10 @@ export const login = async (email: string, senha: string) => {
   if (!aluno) throw { status: 401, message: 'Credenciais inválidas' };
   const match = await bcrypt.compare(senha, aluno.senha);
   if (!match) throw { status: 401, message: 'Credenciais inválidas' };
-  const token = jwt.sign({ id: aluno.id, email: aluno.email }, jwtConfig.secret, { expiresIn: jwtConfig.expiresIn });
+  // jwtConfig.secret e jwtConfig.expiresIn vêm de env vars (strings).
+  // Fazer cast para os tipos esperados pela assinatura do jsonwebtoken.
+  const secret = String(jwtConfig.secret) as jwt.Secret;
+  const expiresIn = jwtConfig.expiresIn as jwt.SignOptions['expiresIn'];
+  const token = jwt.sign({ id: aluno.id, email: aluno.email }, secret, { expiresIn });
   return { token };
 };

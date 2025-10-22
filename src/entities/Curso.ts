@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany } from 'typeorm';
 import { Aluno } from './Aluno';
+import { Matricula } from './Matricula';
 
 @Entity({ name: 'curso' })
 export class Curso {
@@ -18,6 +19,9 @@ export class Curso {
   @CreateDateColumn({ name: 'criado_em' })
   criadoEm!: Date;
 
-  @ManyToMany(() => Aluno, (aluno) => aluno.cursos)
-  alunos!: Aluno[];
+  @OneToMany(() => Matricula, (matricula) => matricula.curso)
+  matriculas!: Matricula[];
+
+  // helper to keep compatibility with previous API which returned alunos
+  alunos?: Aluno[];
 }

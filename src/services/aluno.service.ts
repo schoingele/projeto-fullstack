@@ -3,8 +3,19 @@ import { Aluno } from '../entities/Aluno';
 
 const repo = () => AppDataSource.getRepository(Aluno);
 
-export const listar = async () => repo().find({ relations: ['cursos'] });
-export const buscar = async (id: number) => repo().findOne({ where: { id }, relations: ['cursos'] });
+export const listar = async () => {
+  const alunos = await repo().find({ relations: ['matriculas', 'matriculas.curso'] });
+  return alunos.map((a: any) => ({
+    ...a,
+    cursos: (a.matriculas || []).map((m: any) => m.curso),
+  }));
+};
+
+export const buscar = async (id: number) => {
+  const a = await repo().findOne({ where: { id }, relations: ['matriculas', 'matriculas.curso'] });
+  if (!a) return null;
+  return { ...a, cursos: (a.matriculas || []).map((m: any) => m.curso) } as any;
+};
 
 export const criar = async (data: Partial<Aluno>) => {
   const existing = await repo().findOne({ where: { email: (data.email || '') } });
